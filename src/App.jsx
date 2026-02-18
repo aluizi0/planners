@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import PlannerContainer from "./components/planner/PlannerContainer";
 
 export default function App() {
-  return(
-    <div className="h-screen w-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-gray-800">Hello, Tailwind CSS with Vite!</h1>
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <PlannerContainer />
     </div>
-  
   )
 }
