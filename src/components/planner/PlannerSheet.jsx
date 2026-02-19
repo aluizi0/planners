@@ -15,7 +15,7 @@ export const PlannerSheet = ({ numLines }) => {
       </div>
       
       <div className="absolute bottom-2 right-4 text-[10px] text-gray-400 font-medium">
-        Criado gratuitamente em planners-saas.vercel.app
+        Planners
       </div>
     </div>
   );

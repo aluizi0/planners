@@ -25,7 +25,7 @@ const PlannerContainer = () => {
         
         <div className="flex items-center gap-6">
           <div>
-            <h1 className="text-xl font-bold text-gray-800">Planner Semanal</h1>
+            <h1 className="text-xl font-bold text-gray-800">Plano:</h1>
             <span className="text-xs font-bold bg-gray-200 text-gray-600 px-2 py-1 rounded">FREE</span>
           </div>
 
