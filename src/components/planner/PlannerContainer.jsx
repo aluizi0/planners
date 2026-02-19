@@ -3,13 +3,14 @@ import { Printer, Lock, Plus, Minus } from 'lucide-react';
 import { PlannerSheet } from './PlannerSheet';
 
 const PlannerContainer = () => {
-  // MUDANÇA AQUI: Começando com 7 (o mínimo) em vez de 10
+  // Começando com 7 (o mínimo)
   const [numLines, setNumLines] = useState(7);
 
   const handlePrint = () => window.print();
 
+  // MUDANÇA: Limite máximo agora é 10
   const increaseLines = () => {
-    if (numLines < 12) setNumLines(numLines + 1);
+    if (numLines < 10) setNumLines(numLines + 1);
   };
 
   const decreaseLines = () => {
@@ -43,7 +44,7 @@ const PlannerContainer = () => {
             
             <button 
               onClick={increaseLines}
-              disabled={numLines >= 12} 
+              disabled={numLines >= 10} // MUDANÇA: Trava no 10
               className="p-1 hover:bg-white rounded border disabled:opacity-30 transition-all"
             >
               <Plus size={16} />

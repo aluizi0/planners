@@ -3,21 +3,17 @@ import React from 'react';
 export const WeekGrid = ({ linhas }) => {
   const dias = ['SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA', 'SÁBADO', 'DOMINGO'];
   
-  // Função de Máscara para o Horário (00:00)
   const handleTimeChange = (e) => {
-    let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
-
-    if (value.length > 4) value = value.slice(0, 4); // Limita a 4 números
-
-    if (value.length > 2) {
-      value = `${value.slice(0, 2)}:${value.slice(2)}`; // Adiciona os dois pontos
-    }
-
-    e.target.value = value;
+    let val = e.target.value.replace(/\D/g, ''); 
+    if (val.length >= 1 && parseInt(val[0]) > 2) val = val.slice(0, 0);
+    if (val.length >= 2 && val[0] === '2' && parseInt(val[1]) > 3) val = val.slice(0, 1);
+    if (val.length >= 3 && parseInt(val[2]) > 5) val = val.slice(0, 2);
+    if (val.length > 4) val = val.slice(0, 4);
+    if (val.length > 2) val = `${val.slice(0, 2)}:${val.slice(2)}`;
+    e.target.value = val;
   };
 
   return (
-    // ADICIONADO: overflow-hidden para corrigir linhas vazando da borda
     <div className="w-full border-2 border-black mb-6 overflow-hidden rounded-sm">
       <div className="grid grid-cols-8 bg-[#FFD700] border-b-2 border-black font-bold text-center divide-x-2 divide-black print:bg-[#FFD700] print:print-color-adjust-exact">
         <div className="p-2 flex flex-col justify-center">
@@ -31,21 +27,26 @@ export const WeekGrid = ({ linhas }) => {
       </div>
 
       {[...Array(linhas)].map((_, i) => (
-        <div key={i} className="grid grid-cols-8 divide-x-2 divide-black border-b border-gray-400 last:border-b-0 h-12">
+        <div key={i} className="grid grid-cols-8 divide-x-2 divide-black border-b-2 border-black last:border-b-0 h-15">
           
-          <div className="p-1 h-full">
-            <input 
-              type="text" 
-              className="w-full h-full text-center outline-none bg-transparent font-bold placeholder-gray-300 focus:bg-yellow-50 text-sm" 
-              placeholder="00:00"
-              maxLength={5} // Limita o tamanho total (00:00)
-              onChange={handleTimeChange} // Aplica a formatação
-            />
+          <div className="p-0 h-full relative">
+            <div className="absolute inset-0 flex items-center justify-center">
+                <input 
+                type="text" 
+                className="w-full text-center outline-none bg-transparent font-bold placeholder-gray-300 text-sm p-1" 
+                placeholder="00:00"
+                maxLength={5} 
+                onChange={handleTimeChange}
+                />
+            </div>
           </div>
           
           {[...Array(7)].map((_, j) => (
-            <div key={j} className="p-1 h-full relative group hover:bg-gray-50 transition-colors">
-              <textarea className="w-full h-full resize-none outline-none bg-transparent text-sm p-1 leading-tight focus:bg-yellow-50 overflow-hidden" />
+            <div key={j} className="p-0 h-full relative group transition-colors">
+              <textarea 
+                className="w-full h-full resize-none outline-none bg-transparent text-sm leading-snug overflow-hidden absolute inset-0 p-2" 
+                maxLength={55} // MUDANÇA: Trava exata para não transbordar
+              />
             </div>
           ))}
         </div>
